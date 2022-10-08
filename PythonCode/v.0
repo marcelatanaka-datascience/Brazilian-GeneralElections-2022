@@ -1,4 +1,0 @@
-import pandas as pd
-
-dfAC = pd.read_csv('bweb_1t_AC_051020221321.csv', encoding = 'Latin 1', sep=';')
-dfAL = pd.read_csv('bweb_1t_AL_051020221321/bweb_1t_AL_051020221321.csv', encoding = 'Latin 1', sep=';')
