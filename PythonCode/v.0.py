@@ -29,7 +29,7 @@ dfSP = pd.read_csv('bweb_1t_SP_051020221321/bweb_1t_SP_051020221321.csv', encodi
 dfTO = pd.read_csv('bweb_1t_TO_051020221321/bweb_1t_TO_051020221321.csv', encoding = 'Latin 1', sep=';')
 dfZZ = pd.read_csv('bweb_1t_ZZ_051020221321/bweb_1t_ZZ_051020221321.csv', encoding = 'Latin 1', sep=';')
 
-
+# -----------------------------------------------------------------------#
 
  ## AGGREGATING BRAZIL DATAFRAME
 
@@ -39,9 +39,11 @@ df_BR = dfAC.append([dfAL, dfAM, dfAP, dfBA, dfCE, dfDF, dfES, dfGO, dfMA, dfMG,
 df_BR_small = df_BR[['DS_CARGO_PERGUNTA','NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO','SG_UF','NR_ZONA','NR_SECAO',
                       'QT_VOTOS','NR_ZONA','QT_APTOS','QT_COMPARECIMENTO','QT_ABSTENCOES']]
 
+
+
 # -----------------------------------------------------------------------#
 
-## DISPUTED POSITIONS RESULTS - President
+## DISPUTED POSITIONS RESULTS - PRESIDENTIAL ELECTION
 
 df_PRES = df_BR_small[(df_BR_small['DS_CARGO_PERGUNTA'] == 'Presidente')]
 
@@ -50,16 +52,45 @@ df_PRES = df_BR_small[(df_BR_small['DS_CARGO_PERGUNTA'] == 'Presidente')]
 dfPresCountry = df_PRES.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO']).agg({'QT_VOTOS': sum}) \
     .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
 
+### STATE LEVEL
+
+dfPresState = df_PRES.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO','SG_UF']).agg({'QT_VOTOS': sum}) \
+    .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
+
+### ZONE LEVEL
+
+dfPresZona = df_PRES.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO', 'SG_UF','NR_ZONA']).agg({'QT_VOTOS': sum}) \
+    .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
+
+### SECTION LEVEL
+
+dfPresSection = df_PRES.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO', 'SG_UF','NR_ZONA','NR_SECAO']).agg({'QT_VOTOS': sum}) \
+    .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
 
 
 
-########## Below lines are optional if you want to create and download a .csv file ##########
+# -------  Below lines are optional if you want to create and download a .csv file ------ #
 
 compression_opts = dict(method='zip',
                         archive_name='dfPresCountry.csv') 
 dfPresCountry.to_csv('dfPresCountry.zip', index=False,
           compression=compression_opts) 
 
-########## ----------------------------------------------------------------------- ##########
+compression_opts = dict(method='zip',
+                        archive_name='dfPresState.csv') 
+dfPresState.to_csv('dfPresState.zip', index=False,
+          compression=compression_opts)
+
+compression_opts = dict(method='zip',
+                        archive_name='dfPresZona.csv') 
+dfPresState.to_csv('dfPresZona.zip', index=False,
+          compression=compression_opts)
+
+compression_opts = dict(method='zip',
+                        archive_name='dfPresSection.csv') 
+dfPresState.to_csv('dfPresSection.zip', index=False,
+          compression=compression_opts)
+
+# -----------------------------------------------------------------------#
 
 
