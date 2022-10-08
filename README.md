@@ -1,2 +1,12 @@
-# Brazilian-GeneralElections-2022
-Brazil's 2022 results detailed by position, candidates and parties and from all levels (Country, State, Zone, Section)
+# Brazilian General Elections Results
+
+Hello, there.
+Welcome!
+
+Here you'll find all the files from Brazil's 2022 General Elections.
+The results were extracted from the TSE official website. Check it here: <a href="https://dadosabertos.tse.jus.br/dataset/resultados-2022" target="_blank">Tribunal Superior Eleitoral</a>
+
+The goal here is to focus all the results in a single place, and, most importantly, share the code I used to do so.
+
+Please, fell free to share contributions. PR's are welcome!
+
