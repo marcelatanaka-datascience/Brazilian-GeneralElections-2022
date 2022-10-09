@@ -74,24 +74,85 @@ dfPresSection = df_PRES.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PART
 
 df_SEN = df_BR_small[(df_BR_small['DS_CARGO_PERGUNTA'] == 'Senador')]
 
-
 ### STATE LEVEL
 
 dfSENState = df_SEN.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO','SG_UF']).agg({'QT_VOTOS': sum}) \
     .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
-
 
 ### ZONE LEVEL
 
 dfSENZona = df_SEN.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO', 'SG_UF','NR_ZONA']).agg({'QT_VOTOS': sum}) \
     .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
 
-
 ### SECTION LEVEL
 
 dfSENSection = df_SEN.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO', 'SG_UF','NR_ZONA','NR_SECAO']).agg({'QT_VOTOS': sum}) \
     .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
 
+# -----------------------------------------------------------------------#
+
+## DISPUTED POSITIONS RESULTS - GOVERNOR ELECTIION
+
+df_GOV = df_BR_small[(df_BR_small['DS_CARGO_PERGUNTA'] == 'Governador')]
+
+### STATE LEVEL
+
+dfGOVState = df_GOV.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO','SG_UF']).agg({'QT_VOTOS': sum}) \
+    .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
+
+### ZONE LEVEL
+
+dfGOVZona = df_GOV.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO', 'SG_UF','NR_ZONA']).agg({'QT_VOTOS': sum}) \
+    .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
+
+### SECTION LEVEL
+
+dfGOVSection = df_GOV.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO', 'SG_UF','NR_ZONA','NR_SECAO']).agg({'QT_VOTOS': sum}) \
+    .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
+
+# -----------------------------------------------------------------------#
+
+## DISPUTED POSITIONS RESULTS - CONGRESS ELECTION
+
+df_CON = df_BR_small[(df_BR_small['DS_CARGO_PERGUNTA'] == 'Deputado Federal')]
+
+### STATE LEVEL
+
+dfCONState = df_CON.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO','SG_UF']).agg({'QT_VOTOS': sum}) \
+    .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
+
+### ZONE LEVEL
+
+dfCONZona = df_CON.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO', 'SG_UF','NR_ZONA']).agg({'QT_VOTOS': sum}) \
+    .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
+
+### SECTION LEVEL
+
+dfCONSection = df_CON.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO', 'SG_UF','NR_ZONA','NR_SECAO']).agg({'QT_VOTOS': sum}) \
+    .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
+
+
+
+# -----------------------------------------------------------------------#
+
+## DISPUTED POSITIONS RESULTS - STATE LEGISLATORS
+
+df_SL = df_BR_small[(df_BR_small['DS_CARGO_PERGUNTA'] == 'Deputado Estadual') | (df_BR_small['DS_CARGO_PERGUNTA'] == 'Deputado Distrital')]
+
+### STATE LEVEL
+
+dfSLState = df_SL.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO','SG_UF']).agg({'QT_VOTOS': sum}) \
+    .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
+
+### ZONE LEVEL
+
+dfSLZona = df_SL.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO', 'SG_UF','NR_ZONA']).agg({'QT_VOTOS': sum}) \
+    .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
+
+### SECTION LEVEL
+
+dfSLSection = df_SL.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO', 'SG_UF','NR_ZONA','NR_SECAO']).agg({'QT_VOTOS': sum}) \
+    .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
 
 
 
@@ -109,12 +170,12 @@ dfPresState.to_csv('dfPresState.zip', index=False,
 
 compression_opts = dict(method='zip',
                         archive_name='dfPresZona.csv') 
-dfPresState.to_csv('dfPresZona.zip', index=False,
+dfPresZona.to_csv('dfPresZona.zip', index=False,
           compression=compression_opts)
 
 compression_opts = dict(method='zip',
                         archive_name='dfPresSection.csv') 
-dfPresState.to_csv('dfPresSection.zip', index=False,
+dfPresSection.to_csv('dfPresSection.zip', index=False,
           compression=compression_opts)
 
 compression_opts = dict(method='zip',
@@ -124,13 +185,59 @@ dfSENState.to_csv('dfSENState.zip', index=False,
 
 compression_opts = dict(method='zip',
                         archive_name='dfSENZona.csv') 
-dfSENState.to_csv('dfSENZona.zip', index=False,
+dfSENZona.to_csv('dfSENZona.zip', index=False,
           compression=compression_opts)
 
 compression_opts = dict(method='zip',
                         archive_name='dfSENSection.csv') 
-dfSENState.to_csv('dfSENSection.zip', index=False,
+dfSENSection.to_csv('dfSENSection.zip', index=False,
           compression=compression_opts)
+
+dfGOVState.to_csv('dfGOVState.zip', index=False,
+          compression=compression_opts)
+
+compression_opts = dict(method='zip',
+                        archive_name='dfGOVZona.csv') 
+dfGOVZona.to_csv('dfGOVZona.zip', index=False,
+          compression=compression_opts)
+
+compression_opts = dict(method='zip',
+                        archive_name='dfGOVSection.csv') 
+dfGOVSection.to_csv('dfGOVSection.zip', index=False,
+          compression=compression_opts)
+
+compression_opts = dict(method='zip',
+                        archive_name='dfCONState.csv') 
+dfCONState.to_csv('dfCONState.zip', index=False,
+          compression=compression_opts)
+
+compression_opts = dict(method='zip',
+                        archive_name='dfCONZona.csv') 
+dfSENZona.to_csv('dfCONZona.zip', index=False,
+          compression=compression_opts)
+
+compression_opts = dict(method='zip',
+                        archive_name='dfCONSection.csv') 
+dfCONSection.to_csv('dfCONSection.zip', index=False,
+          compression=compression_opts)
+
+compression_opts = dict(method='zip',
+                        archive_name='dfSLState.csv') 
+dfSLState.to_csv('dfSLState.zip', index=False,
+          compression=compression_opts)
+
+compression_opts = dict(method='zip',
+                        archive_name='dfSLZona.csv') 
+dfSLZona.to_csv('dfSLZona.zip', index=False,
+          compression=compression_opts)
+
+compression_opts = dict(method='zip',
+                        archive_name='dfSLSection.csv') 
+dfSLSection.to_csv('dfSLSection.zip', index=False,
+          compression=compression_opts)
+
 # -----------------------------------------------------------------------#
+
+
 
 
