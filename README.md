@@ -18,3 +18,4 @@ Please, feel free to share contributions. PR's are welcome!
 Some technical notes:
 1. When calculating votes we consider: Valid votes, Null votes, Blank votes and Party votes. We do not consider technical Null votes.
 2. Results by party share aggregate both Nulls and Blanks.
+3. Some files were too large and had to be compressed into .gz files
