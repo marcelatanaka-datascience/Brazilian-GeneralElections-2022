@@ -68,6 +68,32 @@ dfPresSection = df_PRES.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PART
     .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
 
 
+# -----------------------------------------------------------------------#
+
+## DISPUTED POSITIONS RESULTS - SENATE ELECTIION
+
+df_SEN = df_BR_small[(df_BR_small['DS_CARGO_PERGUNTA'] == 'Senador')]
+
+
+### STATE LEVEL
+
+dfSENState = df_SEN.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO','SG_UF']).agg({'QT_VOTOS': sum}) \
+    .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
+
+
+### ZONE LEVEL
+
+dfSENZona = df_SEN.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO', 'SG_UF','NR_ZONA']).agg({'QT_VOTOS': sum}) \
+    .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
+
+
+### SECTION LEVEL
+
+dfSENSection = df_SEN.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO', 'SG_UF','NR_ZONA','NR_SECAO']).agg({'QT_VOTOS': sum}) \
+    .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
+
+
+
 
 # -------  Below lines are optional if you want to create and download a .csv file ------ #
 
@@ -91,6 +117,20 @@ compression_opts = dict(method='zip',
 dfPresState.to_csv('dfPresSection.zip', index=False,
           compression=compression_opts)
 
+compression_opts = dict(method='zip',
+                        archive_name='dfSENState.csv') 
+dfSENState.to_csv('dfSENState.zip', index=False,
+          compression=compression_opts)
+
+compression_opts = dict(method='zip',
+                        archive_name='dfSENZona.csv') 
+dfSENState.to_csv('dfSENZona.zip', index=False,
+          compression=compression_opts)
+
+compression_opts = dict(method='zip',
+                        archive_name='dfSENSection.csv') 
+dfSENState.to_csv('dfSENSection.zip', index=False,
+          compression=compression_opts)
 # -----------------------------------------------------------------------#
 
 
