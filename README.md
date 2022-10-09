@@ -10,5 +10,11 @@ The goal here is to focus all the results in a single place, and, most important
 
 I know it's not the most pythonian code as it is a little verbose and redundant, but... it works :)
 
-Please, fell free to share contributions. PR's are welcome!
+Please, feel free to share contributions. PR's are welcome!
 
+
+----------------------------
+
+Some technical notes:
+1. When calculating votes we consider: Valid votes, Null votes, Blank votes and Party votes. We do not consider technical Null votes.
+2. Results by party share aggregate both Nulls and Blanks.
