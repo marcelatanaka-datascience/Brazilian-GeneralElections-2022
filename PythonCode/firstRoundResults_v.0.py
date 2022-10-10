@@ -63,6 +63,11 @@ dfPresCountry = df_PRES.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PART
 dfPresState = df_PRES.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO','SG_UF']).agg({'QT_VOTOS': sum}) \
     .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
 
+### CITY LEVEL
+
+dfPresCity = df_PRES.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO','NM_MUNICIPIO']).agg({'QT_VOTOS': sum}) \
+    .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
+
 ### ZONE LEVEL
 
 dfPresZona = df_PRES.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO', 'SG_UF','NR_ZONA']).agg({'QT_VOTOS': sum}) \
@@ -83,6 +88,11 @@ df_SEN = df_BR_small[(df_BR_small['DS_CARGO_PERGUNTA'] == 'Senador')]
 ### STATE LEVEL
 
 dfSENState = df_SEN.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO','SG_UF']).agg({'QT_VOTOS': sum}) \
+    .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
+
+### CITY LEVEL
+
+dfSENCity = df_SEN.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO','NM_MUNICIPIO']).agg({'QT_VOTOS': sum}) \
     .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
 
 ### ZONE LEVEL
@@ -106,6 +116,11 @@ df_GOV = df_BR_small[(df_BR_small['DS_CARGO_PERGUNTA'] == 'Governador')]
 dfGOVState = df_GOV.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO','SG_UF']).agg({'QT_VOTOS': sum}) \
     .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
 
+### CITY LEVEL
+
+dfGOVCity = df_GOV.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO','NM_MUNICIPIO']).agg({'QT_VOTOS': sum}) \
+    .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
+
 ### ZONE LEVEL
 
 dfGOVZona = df_GOV.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO', 'SG_UF','NR_ZONA']).agg({'QT_VOTOS': sum}) \
@@ -125,6 +140,11 @@ df_CON = df_BR_small[(df_BR_small['DS_CARGO_PERGUNTA'] == 'Deputado Federal')]
 ### STATE LEVEL
 
 dfCONState = df_CON.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO','SG_UF']).agg({'QT_VOTOS': sum}) \
+    .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
+
+### CITY LEVEL
+
+dfCONCity = df_CON.groupby(['NR_VOTAVEL','NM_VOTAVEL','NR_PARTIDO','NM_PARTIDO','NM_MUNICIPIO']).agg({'QT_VOTOS': sum}) \
     .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
 
 ### ZONE LEVEL
@@ -179,6 +199,11 @@ df_PARTY = df_BR_small[(df_BR_small['DS_CARGO_PERGUNTA'] == 'Deputado Federal')]
 dfPARTYState = df_PARTY.groupby(['NR_PARTIDO','NM_PARTIDO','SG_UF']).agg({'QT_VOTOS': sum}) \
     .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
 
+### CITY LEVEL
+
+dfPARTYCity = df_CON.groupby(['NR_PARTIDO','NM_PARTIDO','NM_MUNICIPIO']).agg({'QT_VOTOS': sum}) \
+    .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
+
 ### ZONE LEVEL
 
 dfPARTYZona = df_PARTY.groupby(['NR_PARTIDO','NM_PARTIDO','SG_UF']).agg({'QT_VOTOS': sum}) \
@@ -201,6 +226,12 @@ df_PARTY_SL = df_BR_small[(df_BR_small['DS_CARGO_PERGUNTA'] == 'Deputado Estadua
 
 dfPARTY_SLState = df_PARTY_SL.groupby(['NR_PARTIDO','NM_PARTIDO','SG_UF']).agg({'QT_VOTOS': sum}) \
     .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
+
+### CITY LEVEL
+
+dfPARTY_SLCity = df_CON.groupby(['NR_PARTIDO','NM_PARTIDO','NM_MUNICIPIO']).agg({'QT_VOTOS': sum}) \
+    .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
+
 
 ### ZONE LEVEL
 
@@ -230,6 +261,12 @@ dfPresState.to_csv('dfPresState.zip', index=False,
           compression=compression_opts)
 
 compression_opts = dict(method='zip',
+                        archive_name='dfPresCity.csv') 
+
+dfPresCity.to_csv('dfPresCity.zip', index=False,
+          compression=compression_opts)
+
+compression_opts = dict(method='zip',
                         archive_name='dfPresZona.csv') 
 dfPresZona.to_csv('dfPresZona.zip', index=False,
           compression=compression_opts)
@@ -242,6 +279,12 @@ dfPresSection.to_csv('dfPresSection.zip', index=False,
 compression_opts = dict(method='zip',
                         archive_name='dfSENState.csv') 
 dfSENState.to_csv('dfSENState.zip', index=False,
+          compression=compression_opts)
+
+compression_opts = dict(method='zip',
+                        archive_name='dfSENCity.csv') 
+
+dfSENCity.to_csv('dfSENCity.zip', index=False,
           compression=compression_opts)
 
 compression_opts = dict(method='zip',
@@ -258,7 +301,13 @@ dfGOVState.to_csv('dfGOVState.zip', index=False,
           compression=compression_opts)
 
 compression_opts = dict(method='zip',
+                        archive_name='dfGOVCity.csv') 
+
+dfGOVCity.to_csv('dfGOVCity.zip', index=False,
+          compression=compression_opts)
+compression_opts = dict(method='zip',
                         archive_name='dfGOVZona.csv') 
+
 dfGOVZona.to_csv('dfGOVZona.zip', index=False,
           compression=compression_opts)
 
@@ -270,6 +319,11 @@ dfGOVSection.to_csv('dfGOVSection.zip', index=False,
 compression_opts = dict(method='zip',
                         archive_name='dfCONState.csv') 
 dfCONState.to_csv('dfCONState.zip', index=False,
+          compression=compression_opts)
+
+compression_opts = dict(method='zip',
+                        archive_name='dfCONCity.csv') 
+dfCONCity.to_csv('dfCONCity.zip', index=False,
           compression=compression_opts)
 
 compression_opts = dict(method='zip',
@@ -288,6 +342,11 @@ dfSLState.to_csv('dfSLState.zip', index=False,
           compression=compression_opts)
 
 compression_opts = dict(method='zip',
+                        archive_name='dfSLCity.csv') 
+dfSLCity.to_csv('dfSLCity.zip', index=False,
+          compression=compression_opts)
+
+compression_opts = dict(method='zip',
                         archive_name='dfSLZona.csv') 
 dfSLZona.to_csv('dfSLZona.zip', index=False,
           compression=compression_opts)
@@ -303,6 +362,11 @@ dfPARTYState.to_csv('dfPARTYState.zip', index=False,
           compression=compression_opts)
 
 compression_opts = dict(method='zip',
+                        archive_name='dfPARTYCity.csv') 
+dfPARTYCity.to_csv('dfPARTYCity.zip', index=False,
+          compression=compression_opts)
+
+compression_opts = dict(method='zip',
                         archive_name='dfPARTYZona.csv') 
 dfPARTYZona.to_csv('dfPARTYZona.zip', index=False,
           compression=compression_opts)
@@ -315,6 +379,11 @@ dfPARTYSection.to_csv('dfPARTYSection.zip', index=False,
 compression_opts = dict(method='zip',
                         archive_name='dfPARTY_SLState.csv') 
 dfPARTY_SLState.to_csv('dfPARTY_SLState.zip', index=False,
+          compression=compression_opts)
+
+compression_opts = dict(method='zip',
+                        archive_name='dfPARTY_SLCity.csv') 
+dfPARTY_SLCity.to_csv('dfPARTY_SLCity.zip', index=False,
           compression=compression_opts)
 
 compression_opts = dict(method='zip',
