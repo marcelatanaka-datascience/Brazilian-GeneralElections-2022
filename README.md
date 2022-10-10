@@ -23,4 +23,5 @@ Please, feel free to share contributions. PR's are welcome!
 ----------------------------
 ## Release versions
 **V.0** - This version was created for local usage. You'll need to have all files into your local machine for the code to work
+
 **V.1** - Comming soon! - No more file downloading needed!
