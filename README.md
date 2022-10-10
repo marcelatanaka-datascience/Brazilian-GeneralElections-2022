@@ -19,3 +19,7 @@ Some technical notes:
 1. When calculating votes we consider: Valid votes, Null votes, Blank votes and Party votes. We do not consider technical Null votes.
 2. Results by party share aggregate both Nulls and Blanks.
 3. Some files were too large and had to be compressed into .gz files. You may decompress it with your regular unzip software
+
+----------------------------
+V.0 - This version was created for local usage. You'll need to have all files into your local machine for the code to work
+V.1 - Comming soon! - No more file downloading needed!
