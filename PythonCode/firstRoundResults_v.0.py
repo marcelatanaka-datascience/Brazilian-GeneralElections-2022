@@ -235,12 +235,12 @@ dfPARTY_SLCity = df_CON.groupby(['NR_PARTIDO','NM_PARTIDO','NM_MUNICIPIO']).agg(
 
 ### ZONE LEVEL
 
-dfPARTY_SLZona = df_PARTY_SL.groupby(['NR_PARTIDO','NM_PARTIDO','SG_UF']).agg({'QT_VOTOS': sum}) \
+dfPARTY_SLZona = df_PARTY_SL.groupby(['NR_PARTIDO','NM_PARTIDO','SG_UF', 'NM_MUNICIPIO', 'NR_ZONA']).agg({'QT_VOTOS': sum}) \
     .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
 
 
 ### SECTION LEVEL
-dfPARTY_SLSection = df_PARTY_SL.groupby(['NR_PARTIDO','NM_PARTIDO','SG_UF']).agg({'QT_VOTOS': sum}) \
+dfPARTY_SLSection = df_PARTY_SL.groupby(['NR_PARTIDO','NM_PARTIDO','SG_UF', 'NM_MUNICIPIO', 'NR_ZONA', 'NR_SECAO']).agg({'QT_VOTOS': sum}) \
     .rename(columns={'QT_VOTOS': 'TOTAL_VOTOS' }).reset_index()
 
 
